@@ -88,6 +88,8 @@ public class VrStylusHandler : StylusHandler
         _stylus.isOnRightHand = stylusIsOnRightHand;
         // Hide the 3D model if not active
         _mxInk_model.SetActive(_stylus.isActive);
+
+        InputManager.m_Instance.WandOnRight = stylusIsOnLeftHand;
         // Hacky
         InputManager.m_Instance.ShowController(!_stylus.isActive, stylusIsOnLeftHand ? 0 : 1);
         InputManager.m_Instance.ShowController(true, stylusIsOnLeftHand ? 1 : 0);
