@@ -41,11 +41,11 @@ namespace TiltBrush
         {
             get
             {
-#if ZAPBOX_SUPPORTED
+// #if ZAPBOX_SUPPORTED
                 // Load into passthrough straight away.
                 return m_PassthroughEnvironment;
-#endif
-                return m_DefaultEnvironment;
+// #endif
+//                 return m_DefaultEnvironment;
 
             }
         }
