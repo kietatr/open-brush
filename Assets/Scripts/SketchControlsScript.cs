@@ -1319,8 +1319,7 @@ namespace TiltBrush
             // Don't allow controller swap if we're grabbing a widget.
             // Don't allow controller swap if a Logitech pen is present.
             if (!TutorialManager.m_Instance.TutorialActive() &&
-                m_GrabWidgetState == GrabWidgetState.None &&
-                !App.VrSdk.VrControls.LogitechPenIsPresent())
+                m_GrabWidgetState == GrabWidgetState.None)
             {
                 if (InputManager.m_Instance.GetCommandDown(InputManager.SketchCommands.SwapControls))
                 {
@@ -2466,8 +2465,8 @@ namespace TiltBrush
             bool bAllowWorldTransform = m_SketchSurfacePanel.ActiveTool.AllowWorldTransformation() &&
                 (m_GrabWorldState != GrabWorldState.ResetDone) &&
                 (!PointerManager.m_Instance.IsMainPointerCreatingStroke() || App.Instance.IsLoading()) &&
-                App.Instance.IsInStateThatAllowsAnyGrabbing() &&
-                !m_DisableWorldGrabbing;
+                App.Instance.IsInStateThatAllowsAnyGrabbing();
+                // !m_DisableWorldGrabbing;
 
             bool bWorldGrabWandPrev = m_GrabWand.grabbingWorld;
             bool bWorldGrabBrushPrev = m_GrabBrush.grabbingWorld;
