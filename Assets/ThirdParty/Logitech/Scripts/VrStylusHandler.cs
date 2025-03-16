@@ -89,10 +89,31 @@ public class VrStylusHandler : StylusHandler
         // Hide the 3D model if not active
         _mxInk_model.SetActive(_stylus.isActive);
 
-        InputManager.m_Instance.WandOnRight = stylusIsOnLeftHand;
-        // Hacky
-        InputManager.m_Instance.ShowController(!_stylus.isActive, stylusIsOnLeftHand ? 0 : 1);
-        InputManager.m_Instance.ShowController(true, stylusIsOnLeftHand ? 1 : 0);
+        if (_stylus.isActive)
+        {
+            if (stylusIsOnLeftHand)
+            {
+                // This line is equivalent to clicking on the Swap Hands button. "Wand" means the non-dominant hand controller
+                InputManager.m_Instance.WandOnRight = true;
+
+                // By default, index 0 is left controller and 1 is right. But after switching hand, index 0 is right and 1 is left
+                InputManager.m_Instance.ShowController(true, 0);  // Show right controller
+                InputManager.m_Instance.ShowController(false, 1);  // Hide left controller
+            }
+            else if (stylusIsOnRightHand)
+            {
+                InputManager.m_Instance.WandOnRight = false;
+
+                // The previous line sets the controllers back to the default right-handedness, so the controller indeces are back to default again: index 0 = left and 1 = right  
+                InputManager.m_Instance.ShowController(true, 0);  // Show left
+                InputManager.m_Instance.ShowController(false, 1);  // Hide right 
+            }
+        }
+        else
+        {
+            InputManager.m_Instance.ShowController(true, 0);
+            InputManager.m_Instance.ShowController(true, 1);
+        }
 
         // Select the right/left hand stylus pose to be used
         string MX_Ink_Pose = _stylus.isOnRightHand ? MX_Ink_Pose_Right : MX_Ink_Pose_Left;
